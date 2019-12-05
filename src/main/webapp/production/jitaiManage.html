@@ -153,7 +153,7 @@
                             hidden: 'true',
                             align: 'center'
                         }, {
-                            field: 'informNumber',
+                            field: 'inf ormNumber',
                             title: '通知单号',
                             width: 100,
                             align: 'center'
@@ -182,7 +182,7 @@
                             align: 'center',
                             sortable: true,
                             sorter: function (a, b) {
-                                return (a > b ? 1 : -1);
+                                return (Number(a) > Number(b) ? 1 : -1);
                             }
                         }, {
                             field: 'clientname',
