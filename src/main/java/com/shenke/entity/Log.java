@@ -41,7 +41,7 @@ public class Log {
 	@JoinColumn(name = "userId")
 	private User user; // 操作用户
 
-	@Column(length = 1000)
+	@Column(length = 5000)
 	private String content; // 操作内容
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -218,4 +218,6 @@ public interface StorageService {
     List<Map<String, Object>> tongji(String stardate, String enddate, String clientname) throws ParseException;
 
     List<Map<String, Object>> tongji(String stardate, String enddate) throws ParseException;
+
+    void updatePanDianJiByIds(String pandianji, Integer... ids);
 }

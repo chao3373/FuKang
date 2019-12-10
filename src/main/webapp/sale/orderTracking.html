@@ -21,7 +21,7 @@
 
             $('#dg').datagrid({
                 rowStyler: function (index, row) {
-                    if((row.state.substring(0,4)) == "生产完成"){
+                    if ((row.state.substring(0, 4)) == "生产完成") {
                         return 'background-color:green;color:white;font-weight:bold;';
                     }
                 }
@@ -61,7 +61,7 @@
                         width: 100,
                         align: 'center',
                         sortable: true,
-                        sorter: function(a, b) {
+                        sorter: function (a, b) {
                             return (a > b ? 1 : -1);
                         }
                     }, {
@@ -70,7 +70,7 @@
                         width: 100,
                         align: 'center',
                         sortable: true,
-                        sorter: function(a, b) {
+                        sorter: function (a, b) {
                             return (a > b ? 1 : -1);
                         }
                     }, {
@@ -84,7 +84,7 @@
                         width: 55,
                         align: 'center',
                         sortable: true,
-                        sorter: function(a, b) {
+                        sorter: function (a, b) {
                             return (a > b ? 1 : -1);
                         }
                     }, {
@@ -93,7 +93,7 @@
                         width: 55,
                         align: 'center',
                         sortable: true,
-                        sorter: function(a, b) {
+                        sorter: function (a, b) {
                             return (a > b ? 1 : -1);
                         }
                     }, {
@@ -102,7 +102,7 @@
                         width: 55,
                         align: 'center',
                         sortable: true,
-                        sorter: function(a, b) {
+                        sorter: function (a, b) {
                             return (a > b ? 1 : -1);
                         }
                     }, {
@@ -212,7 +212,7 @@
         //搜索
         function screenSale() {
             var data = getFrom('#fm');
-            data.name = data.saleNumber;
+            data.queryName = data.saleNumber;
             console.log(data);
             $.ajax({
                 type: "POST",
@@ -285,8 +285,8 @@
                     </td>
                     <td>
                         选择机台：<input class="easyui-combobox" id="jitai" name="jiTai"
-                            style="width: 100px"
-                            data-options="panelHeight:'auto',valueField:'id',textField:'name',url:'/admin/jitai/jitaiList'"/>
+                                    style="width: 100px"
+                                    data-options="panelHeight:'auto',valueField:'id',textField:'name',url:'/admin/jitai/jitaiList'"/>
                     </td>
                 </tr>
                 <tr>
@@ -299,6 +299,9 @@
                     <td>
                         通知单号：<input id="informNumber" name="informNumber" style="width: 130px"/>
                     </td>
+                    <td>产品名称：<input class="easyui-combobox" id="name" name="name"
+                            style="width: 100px" data-options="valueField:'name',textField:'name',url:'/admin/product/productList'"/>
+                    </td>
                     <td>
                         <a href="javascript:screenSale()"
                            class="easyui-linkbutton" iconCls="icon-search">查询</a>
@@ -308,8 +311,8 @@
                            iconCls="icon-reload">刷新</a>
                     </td>
                     <!--<td>-->
-                        <!--<a class="easyui-linkbutton" iconCls="icon-reload"-->
-                           <!--href="javascript:daochu('#dg')">导出</a>-->
+                    <!--<a class="easyui-linkbutton" iconCls="icon-reload"-->
+                    <!--href="javascript:daochu('#dg')">导出</a>-->
                     <!--</td>-->
                     <td>
                         <a class="easyui-linkbutton" iconCls="icon-reload"

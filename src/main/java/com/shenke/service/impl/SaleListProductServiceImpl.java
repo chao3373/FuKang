@@ -587,14 +587,17 @@ public class SaleListProductServiceImpl implements SaleListProductService {
 
         String sql = "";
 
-        if (StringUtil.isNotEmpty(saleListProduct.getName())) {
-            sql += " and b.sale_number = '" + saleListProduct.getName() + "'";
+        if (StringUtil.isNotEmpty(saleListProduct.getQueryName())) {
+            sql += " and b.sale_number = '" + saleListProduct.getQueryName() + "'";
         }
         if (StringUtil.isNotEmpty(saleListProduct.getClientname())) {
             sql += " and a.clientname = '" + saleListProduct.getClientname() + "'";
         }
         if (StringUtil.isNotEmpty(saleListProduct.getPeasant())) {
             sql += " and a.peasant = '" + saleListProduct.getPeasant() + "'";
+        }
+        if (StringUtil.isNotEmpty(saleListProduct.getName())) {
+            sql += " and a.name = '" + saleListProduct.getName() + "'";
         }
         if (saleListProduct.getInformNumber() != null) {
             sql += " and a.inform_number = '" + saleListProduct.getInformNumber() + "'";

@@ -3,13 +3,10 @@ package com.shenke.controller.admin;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Date;
+import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Resource;
 
 import com.shenke.entity.*;
@@ -99,7 +96,7 @@ public class StorageAdminController {
     }
 
     /**
-     * 数据库改为已出库
+     * 数据库改为提货
      *
      * @param ids
      * @return
@@ -110,11 +107,7 @@ public class StorageAdminController {
         Map<String, Object> map = new HashMap<>();
         String[] idArr = ids.split(",");
         storageService.outStorage(idArr, new Date());
-//        for (int i = 0; i < idArr.length; i++) {
-//            int id = Integer.parseInt(idArr[i]);
-//            logService.save(new Log(Log.AUDIT_ACTION, "准备出库"));
-//            storageService.outStorage(id, new Date());
-//        }
+        logService.save(new Log(Log.UPDATE_ACTION, "提货：" + "数量：" + idArr.length + " id：" + Arrays.toString(idArr)));
         map.put("success", true);
         return map;
     }
@@ -134,9 +127,6 @@ public class StorageAdminController {
         Map<String, Object> map = new HashMap<>();
         String[] idArr = ids.split(",");
         storageService.updateStateById("装车", idArr, new Date(), ck);
-//        for (int i = 0; i < idArr.length; i++) {
-//            storageService.updateStateById("装车", Integer.parseInt(idArr[i]), new Date(), ck);
-//        }
         map.put("success", true);
         return map;
     }
@@ -151,16 +141,17 @@ public class StorageAdminController {
         return map;
     }
 
-
+    /***
+     * 根据id修改盘点机序列号
+     * @param pandianji
+     * @param ids
+     * @return
+     */
     @RequestMapping("/save")
-    public Map<String, Object> gai(String pandianji, String ids) {
+    public Map<String, Object> gai(String pandianji, Integer[] ids) {
         Map<String, Object> map = new HashMap<>();
-        String[] idArr = ids.split(",");
-        for (int i = 0; i < idArr.length; i++) {
-            int id = Integer.parseInt(idArr[i]);
-            logService.save(new Log(Log.AUDIT_ACTION, "准备出库"));
-            storageService.gai(pandianji, id);
-        }
+        logService.save(new Log(Log.AUDIT_ACTION, "准备出库" + ids.length));
+        storageService.updatePanDianJiByIds(pandianji, ids);
         map.put("success", true);
         return map;
     }
@@ -523,13 +514,6 @@ public class StorageAdminController {
         if (storage.getGroup() != null) {
             storage.setGroupName(groupService.findById(storage.getGroup().getId()).getName());
         }
-//        Map<String, Object> map = new HashMap<>();
-//        List list = storageService.selectEdit(storage, dateInProducedd, page, rows);
-//        Long total = storageService.getCount(storage, dateInProducedd);
-//        map.put("success", true);
-//        map.put("rows", list);
-//        map.put("total", total);
-//        System.out.println(map);
         return storageService.selectEditt(storage, dateInProducedd, page, rows);
     }
 
@@ -580,8 +564,6 @@ public class StorageAdminController {
         Map<String, Object> map = new HashMap<>();
         String[] split = idArr.split(",");
         storageService.updateByIdAndState(split, state);
-//        for (int i = 0; i < idArr.split(",").length; i++) {
-//        }
         map.put("success", true);
         return map;
     }

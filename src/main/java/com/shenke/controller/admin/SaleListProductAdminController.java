@@ -885,7 +885,6 @@ public class SaleListProductAdminController {
     @RequestMapping("/dingDanZhuiZong")
     public Map<String,Object> dingDanZhuiZong(SaleListProduct saleListProduct){
         Map<String,Object> map = new HashMap<>();
-//        map.put("rows",saleListProductService.dingDanZhuiZong(saleListProduct));
         map.put("rows",saleListProductService.dingDanZhuiZongg(saleListProduct));
         map.put("success",true);
         return map;

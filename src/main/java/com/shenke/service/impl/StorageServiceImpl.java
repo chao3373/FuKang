@@ -1851,4 +1851,9 @@ public class StorageServiceImpl implements StorageService {
         return list;
     }
 
+    @Override
+    public void updatePanDianJiByIds(String pandianji, Integer... ids) {
+        storageRepository.updatePanDianJiByIds(pandianji, ids);
+    }
+
 }

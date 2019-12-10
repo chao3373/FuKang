@@ -37,7 +37,7 @@ public interface StorageRepository extends JpaRepository<Storage, Integer>, JpaS
     public Storage selectByMaxId();
 
     /**
-     * 修改为出库
+     * 修改为提货
      */
     @Modifying
     @Query(value = "update t_storage set state = '提货', date_of_delivery = ?2 where id in ?1", nativeQuery = true)
@@ -352,4 +352,9 @@ public interface StorageRepository extends JpaRepository<Storage, Integer>, JpaS
      */
     @Query(value = "select ROUND(IFNULL(SUM(realityweight),0),2) as yishengchan from t_storage where sale_number in ?1", nativeQuery = true)
     Double findYSCZL(String[] saleNumbers);
+
+    //根据id修改盘点机
+    @Modifying
+    @Query(value = "update t_storage set serial_number = ?1 where id = ?2", nativeQuery = true)
+    void updatePanDianJiByIds(String pandianji, Integer[] ids);
 }
