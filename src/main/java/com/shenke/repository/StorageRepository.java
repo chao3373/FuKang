@@ -355,6 +355,11 @@ public interface StorageRepository extends JpaRepository<Storage, Integer>, JpaS
 
     //根据id修改盘点机
     @Modifying
-    @Query(value = "update t_storage set serial_number = ?1 where id = ?2", nativeQuery = true)
+    @Query(value = "update t_storage set serial_number = ?1 where id in ?2", nativeQuery = true)
     void updatePanDianJiByIds(String pandianji, Integer[] ids);
+
+    //提货
+    @Modifying
+    @Query(value = "update t_storage set serial_number = ?3, delivery_time = ?2, state = '提货' where id in ?1", nativeQuery = true)
+    void out(Integer[] ids, Date date, String pandianji);
 }

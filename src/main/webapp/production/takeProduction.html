@@ -38,7 +38,8 @@
             $.messager.confirm("系统提示", "确定要将这些商品出库吗", function (r) {
                 if (r) {
                     $.post("/admin/storage/out", {
-                        ids: ids
+                        ids: ids,
+                        pandianji: $("#pandianji").combobox("getValue"),
                     }, function (result) {
                         if (result.success) {
                             // $('#a').datagrid('loadData', {
@@ -51,14 +52,14 @@
                             $.messager.alert("系统提示", result.errorInfo);
                         }
                     });
-                    $.post("/admin/storage/save", {
-                        pandianji: $("#pandianji").combobox("getValue"),
-                        ids: ids
-                    }, function (result) {
-                        if (result.success) {
-
-                        }
-                    }, "json");
+                    // $.post("/admin/storage/save", {
+                    //     pandianji: $("#pandianji").combobox("getValue"),
+                    //     ids: ids
+                    // }, function (result) {
+                    //     if (result.success) {
+                    //
+                    //     }
+                    // }, "json");
 
                 }
             });

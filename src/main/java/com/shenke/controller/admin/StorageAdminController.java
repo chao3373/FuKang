@@ -103,11 +103,10 @@ public class StorageAdminController {
      */
 
     @RequestMapping("/out")
-    public Map<String, Object> outStorage(String ids) {
+    public Map<String, Object> outStorage(Integer[] ids, String pandianji) {
         Map<String, Object> map = new HashMap<>();
-        String[] idArr = ids.split(",");
-        storageService.outStorage(idArr, new Date());
-        logService.save(new Log(Log.UPDATE_ACTION, "提货：" + "数量：" + idArr.length + " id：" + Arrays.toString(idArr)));
+        storageService.out(ids, new Date(), pandianji);
+        logService.save(new Log(Log.UPDATE_ACTION, "提货：" + "数量：" + ids.length + " id：" + Arrays.toString(ids) + "盘点机：" + pandianji));
         map.put("success", true);
         return map;
     }

@@ -1856,4 +1856,9 @@ public class StorageServiceImpl implements StorageService {
         storageRepository.updatePanDianJiByIds(pandianji, ids);
     }
 
+    @Override
+    public void out(Integer[] ids, Date date, String pandianji) {
+        storageRepository.out(ids, date, pandianji);
+    }
+
 }
